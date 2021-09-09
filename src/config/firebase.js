@@ -3,13 +3,12 @@ import { initializeApp } from 'firebase/app'
 import { useState, useEffect, useContext, createContext } from 'react'
 
 export const firebaseApp = initializeApp({
-  apiKey: 'AIzaSyCKEKpLKAad62VwyRx_J9Qe7_3R7o33JIY',
-  authDomain: 'fir-auth-52005.firebaseapp.com',
-  projectId: 'fir-auth-52005',
-  storageBucket: 'fir-auth-52005.appspot.com',
-  messagingSenderId: '986012551982',
-  appId: '1:986012551982:web:63631ad43da7711b8408bf',
-  measurementId: 'G-2FK5XC92GY'
+  apiKey: 'AIzaSyAAX6b-J2EY-BgDrEUjZd6NXRRNFJzPUOs',
+  authDomain: 'grouper-319200.firebaseapp.com',
+  projectId: 'grouper-319200',
+  storageBucket: 'grouper-319200.appspot.com',
+  messagingSenderId: '900361003687',
+  appId: '1:900361003687:web:656b702c97e533ec197182'
 })
 
 export const AuthContext = createContext()

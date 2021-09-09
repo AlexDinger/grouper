@@ -1,27 +1,18 @@
-import { useCallback } from 'react'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import socialAuth from './service/auth'
+import { githubProvider } from './config/authMethods'
 
-export const Login = () => {
-  const handleSubmit = useCallback(async e => {
-    e.preventDefault()
-
-    const { email, password } = e.target.elements
-    const auth = getAuth()
-    try {
-      await signInWithEmailAndPassword(auth, email.value, password.value)
-    } catch (e) {
-      alert(e.message)
-    }
-  }, [])
+const Login = () => {
+  const handleLogin = async provider => {
+    const res = await socialAuth(provider)
+    console.log(res)
+  }
 
   return (
-    <>
+    <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input name="email" placeholder="email" type="email" />
-        <input name="password" placeholder="password" type="password" />
-        <button type="submit">Login</button>
-      </form>
-    </>
+      <button onClick={() => handleLogin(githubProvider)}>Github</button>
+    </div>
   )
 }
+
+export default Login

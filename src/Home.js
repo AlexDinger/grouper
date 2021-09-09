@@ -1,7 +1,7 @@
 import { getAuth, signOut } from 'firebase/auth'
-import { useAuthState } from './firebase'
+import { useAuthState } from './config/firebase'
 
-export const Home = () => {
+const Home = () => {
   const { user } = useAuthState()
 
   return (
@@ -11,3 +11,5 @@ export const Home = () => {
     </>
   )
 }
+
+export default Home
