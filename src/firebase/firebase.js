@@ -1,5 +1,6 @@
 import { getAuth, onAuthStateChanged } from '@firebase/auth'
 import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 import { useState, useEffect, useContext, createContext } from 'react'
 
 export const firebaseApp = initializeApp({
@@ -28,3 +29,5 @@ export const useAuthState = () => {
   const auth = useContext(AuthContext)
   return { ...auth, isAuthenticated: auth.user != null }
 }
+
+export const db = getFirestore(firebaseApp)

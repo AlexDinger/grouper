@@ -1,12 +1,10 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from 'react-router-dom'
-import Home from './Home'
-import Login from './Login'
-import { AuthContextProvider, useAuthState } from './config/firebase'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import AuthHome from './pages/Home'
+import Login from './pages/Login'
+import { AuthContextProvider, useAuthState } from './firebase/firebase'
+import Layout from './components/Layout'
+import Navigation from './components/Navigation'
+import Landing from './pages/Landing'
 
 const AuthenticatedRoute = ({ component: C, ...props }) => {
   const { isAuthenticated } = useAuthState()
@@ -15,7 +13,7 @@ const AuthenticatedRoute = ({ component: C, ...props }) => {
     <Route
       {...props}
       render={routeProps =>
-        isAuthenticated ? <C {...routeProps} /> : <Redirect to="/login" />
+        isAuthenticated ? <C {...routeProps} /> : <Redirect to="/landing" />
       }
     />
   )
@@ -37,13 +35,14 @@ const UnauthenticatedRoute = ({ component: C, ...props }) => {
 function App() {
   return (
     <AuthContextProvider>
-      <Router>
-        <div>
-          <Link to="/">Home</Link> | <Link to="/login">Login</Link>
-        </div>
-        <AuthenticatedRoute exact path="/" component={Home} />
-        <UnauthenticatedRoute exact path="/login" component={Login} />
-      </Router>
+      <Layout>
+        <Router>
+          <Navigation />
+          <AuthenticatedRoute exact path="/" component={AuthHome} />
+          <UnauthenticatedRoute exact path="/login" component={Login} />
+          <UnauthenticatedRoute exact path="/landing" component={Landing} />
+        </Router>
+      </Layout>
     </AuthContextProvider>
   )
 }
